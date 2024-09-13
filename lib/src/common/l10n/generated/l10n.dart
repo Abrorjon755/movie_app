@@ -169,6 +169,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please Register to use more functions`
+  String get pleaseRegister {
+    return Intl.message(
+      'Please Register to use more functions',
+      name: 'pleaseRegister',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -177,6 +187,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ru'),
     ];
   }
 

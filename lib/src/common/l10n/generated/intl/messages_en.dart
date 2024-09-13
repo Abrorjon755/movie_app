@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notFound": MessageLookupByLibrary.simpleMessage(
             "We Are Sorry, We Can Not Find The Movie :("),
         "nowPlaying": MessageLookupByLibrary.simpleMessage("Now Playing"),
+        "pleaseRegister": MessageLookupByLibrary.simpleMessage(
+            "Please Register to use more functions"),
         "popular": MessageLookupByLibrary.simpleMessage("Popular"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "topRated": MessageLookupByLibrary.simpleMessage("Top Rated"),

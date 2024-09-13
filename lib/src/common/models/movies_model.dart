@@ -1,0 +1,3 @@
+class MoviesModel{
+  const MoviesModel();
+}

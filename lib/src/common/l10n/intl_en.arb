@@ -11,5 +11,6 @@
   "popular": "Popular",
   "notFound": "We Are Sorry, We Can Not Find The Movie :(",
   "findMovie": "Find your movie by Type title, categories, years, etc ",
-  "noMovie": "There is no movie yet!"
+  "noMovie": "There is no movie yet!",
+  "pleaseRegister": "Please Register to use more functions"
 }

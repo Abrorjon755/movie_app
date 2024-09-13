@@ -16,7 +16,7 @@ class WatchListScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: false
+              child: true
                   ? const NoMovie()
                   : ListView(
                       padding: const EdgeInsets.symmetric(vertical: 24),

@@ -131,7 +131,7 @@ class MovieScreen extends StatelessWidget {
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  for (int i = 0; i < 5; i++)
+                  for (int i = 0; i < 4; i++)
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6),
                       child: GridView(

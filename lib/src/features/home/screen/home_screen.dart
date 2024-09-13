@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:movie_app/main.dart';
 import 'package:movie_app/src/common/style/app_icons.dart';
+import 'package:movie_app/src/common/utils/extension_context.dart';
 import 'package:movie_app/src/features/movie/screen/movie_screen.dart';
 import 'package:movie_app/src/features/search/screen/search_screen.dart';
 import 'package:movie_app/src/features/watch_list/screen/watch_list_screen.dart';
@@ -18,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late final PageController controller;
   int value = 0;
 
-  void pageChange(int v) {
+  void pageChange(int v, BuildContext context) {
     setState(() {
       value = v;
       controller.animateToPage(
@@ -26,7 +28,44 @@ class _HomeScreenState extends State<HomeScreen> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
+      if(value == 0){
+        context.dependencies.homeRepository.getNowPlaying();
+      }
+      if (value == 2) {
+        checkRegister(context);
+      }
     });
+  }
+
+  Future? checkRegister(BuildContext context) {
+    bool token = shp.getBool("token") ?? false;
+    if (!token) {
+      return showModalBottomSheet(
+        context: context,
+        builder: (context) => SizedBox(
+          height: 200,
+          width: double.infinity,
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondary,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: const SizedBox(
+                  width: 50,
+                  height: 5,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(S.of(context).pleaseRegister)
+            ],
+          ),
+        ),
+      );
+    }
+    return null;
   }
 
   @override
@@ -78,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedIndex: value,
             indicatorColor: Colors.transparent,
             overlayColor: WidgetStateColor.transparent,
-            onDestinationSelected: pageChange,
+            onDestinationSelected: (value) => pageChange(value, context),
             destinations: [
               NavigationDestination(
                 icon: SvgPicture.asset(
