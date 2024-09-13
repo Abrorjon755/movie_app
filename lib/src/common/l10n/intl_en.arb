@@ -1,3 +1,15 @@
 {
-  "@@locale" : "en"
+  "@@locale" : "en",
+  "whatToWatch": "What do you want to watch?",
+  "home": "Home",
+  "search": "Search",
+  "detail": "Detail",
+  "watchList": "Watch List",
+  "nowPlaying": "Now Playing",
+  "upcoming": "Upcoming",
+  "topRated": "Top Rated",
+  "popular": "Popular",
+  "notFound": "We Are Sorry, We Can Not Find The Movie :(",
+  "findMovie": "Find your movie by Type title, categories, years, etc ",
+  "noMovie": "There is no movie yet!"
 }

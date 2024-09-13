@@ -21,5 +21,22 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "detail": MessageLookupByLibrary.simpleMessage("Detail"),
+        "findMovie": MessageLookupByLibrary.simpleMessage(
+            "Find your movie by Type title, categories, years, etc "),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "noMovie":
+            MessageLookupByLibrary.simpleMessage("There is no movie yet!"),
+        "notFound": MessageLookupByLibrary.simpleMessage(
+            "We Are Sorry, We Can Not Find The Movie :("),
+        "nowPlaying": MessageLookupByLibrary.simpleMessage("Now Playing"),
+        "popular": MessageLookupByLibrary.simpleMessage("Popular"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "topRated": MessageLookupByLibrary.simpleMessage("Top Rated"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
+        "watchList": MessageLookupByLibrary.simpleMessage("Watch List"),
+        "whatToWatch":
+            MessageLookupByLibrary.simpleMessage("What do you want to watch?")
+      };
 }

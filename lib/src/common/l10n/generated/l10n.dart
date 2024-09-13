@@ -49,6 +49,126 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `What do you want to watch?`
+  String get whatToWatch {
+    return Intl.message(
+      'What do you want to watch?',
+      name: 'whatToWatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Detail`
+  String get detail {
+    return Intl.message(
+      'Detail',
+      name: 'detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Watch List`
+  String get watchList {
+    return Intl.message(
+      'Watch List',
+      name: 'watchList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Now Playing`
+  String get nowPlaying {
+    return Intl.message(
+      'Now Playing',
+      name: 'nowPlaying',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upcoming`
+  String get upcoming {
+    return Intl.message(
+      'Upcoming',
+      name: 'upcoming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Rated`
+  String get topRated {
+    return Intl.message(
+      'Top Rated',
+      name: 'topRated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Popular`
+  String get popular {
+    return Intl.message(
+      'Popular',
+      name: 'popular',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We Are Sorry, We Can Not Find The Movie :(`
+  String get notFound {
+    return Intl.message(
+      'We Are Sorry, We Can Not Find The Movie :(',
+      name: 'notFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find your movie by Type title, categories, years, etc `
+  String get findMovie {
+    return Intl.message(
+      'Find your movie by Type title, categories, years, etc ',
+      name: 'findMovie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no movie yet!`
+  String get noMovie {
+    return Intl.message(
+      'There is no movie yet!',
+      name: 'noMovie',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

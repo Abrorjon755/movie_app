@@ -16,19 +16,56 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+  dio: ^5.7.0
+  flutter_svg: ^2.0.10+1
+  shared_preferences: ^2.3.2
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+
 
 flutter:
 
+  assets:
+    - assets/icons/
+
   uses-material-design: true
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/Poppins-Black.ttf
+          weight: 900
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/poppins/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/poppins/Poppins-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/poppins/Poppins-Thin.ttf
+          weight: 100
 
 flutter_intl:
   enabled: true
   main_locale: en
   arb_dir: lib/src/common/l10n
   output_dir: lib/src/common/l10n/generated
+
+flutter_launcher_icons:
+  image_path_android: "assets/images/movie.png"
+  adaptive_icon_background: "#242a32"
+  image_path_ios: "assets/images/movie.png"
+  android: true
+  ios: true
