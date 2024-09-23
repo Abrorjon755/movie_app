@@ -1,4 +1,4 @@
-class AppIcons{
+class AppIcons {
   const AppIcons._();
 
   static const String calendar = "assets/icons/CalendarBlank.svg";
@@ -6,6 +6,7 @@ class AppIcons{
   static const String home = "assets/icons/Home.svg";
   static const String noResult = "assets/icons/no-results 1.svg";
   static const String save = "assets/icons/Save.svg";
+  static const String saved = "assets/icons/saved.svg";
   static const String search = "assets/icons/Search.svg";
   static const String search2 = "assets/icons/Search (1).svg";
   static const String ticket = "assets/icons/Ticket.svg";

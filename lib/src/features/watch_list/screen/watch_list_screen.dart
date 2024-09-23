@@ -1,120 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movie_app/src/features/watch_list/screen/no_movie.dart';
 
-import '../../../common/style/app_icons.dart';
+import '../../../common/models/genre.dart';
+import '../../../common/models/movies_model.dart';
+import '../../../common/utils/extension_context.dart';
+import '../../../common/widgets/movie_item.dart';
+import 'no_movie.dart';
 
-class WatchListScreen extends StatelessWidget {
+class WatchListScreen extends StatefulWidget {
   const WatchListScreen({super.key});
+
+  @override
+  State<WatchListScreen> createState() => WatchListScreenState();
+}
+
+class WatchListScreenState extends State<WatchListScreen> {
+  final List<MovieModel> movies = [];
+  List<Genre> genres = [];
+
+  void getGenre() async {
+    genres = await context.dependencies.movieDetailRepository.getGenre();
+    setState(() {});
+  }
+
+  void getMovies() async {
+    movies.clear();
+
+    movies.addAll((await context.dependencies.db.getMovies()).reversed);
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getMovies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: context.colorScheme.primary,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+        centerTitle: true,
+        title: Text(
+          context.lang.watchList,
+          style: context.textTheme.titleMedium?.copyWith(
+            color: context.colorScheme.onPrimary,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           children: [
             Expanded(
-              child: true
+              child: movies.isEmpty
                   ? const NoMovie()
-                  : ListView(
+                  : ListView.builder(
                       padding: const EdgeInsets.symmetric(vertical: 24),
-                      children: [
-                        for (int i = 0; i < 2; i++)
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: const SizedBox(
-                                      width: 95,
-                                      height: 120,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Spiderman",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge,
-                                      ),
-                                      const SizedBox(height: 14),
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(AppIcons.star),
-                                          const SizedBox(width: 5),
-                                          Text(
-                                            "9.5",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelMedium
-                                                ?.copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .tertiary,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 5),
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(AppIcons.ticket),
-                                          const SizedBox(width: 5),
-                                          Text(
-                                            "Action",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelMedium,
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 5),
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(AppIcons.calendar),
-                                          const SizedBox(width: 5),
-                                          Text(
-                                            "2019",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelMedium,
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 5),
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(AppIcons.clock),
-                                          const SizedBox(width: 5),
-                                          Text(
-                                            "139 minutes",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelMedium,
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 5),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 24),
-                            ],
-                          ),
-                      ],
+                      itemCount: movies.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          MovieItem(
+                        movie: movies[index],
+                        genres: genres,
+                      ),
                     ),
             ),
           ],

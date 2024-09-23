@@ -1,35 +1,114 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movie_app/src/common/style/app_icons.dart';
-import 'package:movie_app/src/features/search/screen/not_find.dart';
 
-import '../../../common/l10n/generated/l10n.dart';
+import '../../../common/models/genre.dart';
+import '../../../common/models/movies_model.dart';
+import '../../../common/style/app_icons.dart';
+import '../../../common/utils/debouncing_throttling.dart';
+import '../../../common/utils/extension_context.dart';
+import '../../home/screen/home_screen.dart';
+import 'search_body.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  List<Genre> genres = [];
+
+  void getGenre() async {
+    genres = await context.dependencies.movieDetailRepository.getGenre();
+    setState(() {});
+  }
+
+  late final ScrollController controller;
+
+  final throttling = Throttling(const Duration(milliseconds: 300));
+  final debouncer = Debouncing(const Duration(milliseconds: 300));
+
+  List<MovieModel> movies = [];
+  String searchText = '';
+  int page = 1;
+
+  void onChange(String value) async {
+    searchText = value;
+    page = 1;
+
+    movies = await context.dependencies.searchRepository.getMovies(
+      page: page++,
+      text: searchText,
+    );
+
+    setState(() {});
+  }
+
+  void pagination() async {
+    if (controller.position.pixels == controller.position.maxScrollExtent) {
+      movies.addAll(
+        await context.dependencies.searchRepository.getMovies(
+          page: page++,
+          text: searchText,
+        ),
+      );
+
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ScrollController()..addListener(pagination);
+    getGenre();
+  }
+
+  @override
+  void dispose() {
+    controller
+      ..removeListener(pagination)
+      ..dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: context.colorScheme.primary,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+        centerTitle: true,
+        title: Text(
+          context.lang.search,
+          style: context.textTheme.titleMedium?.copyWith(
+            color: context.colorScheme.onPrimary,
+          ),
+        ),
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
+                color: context.colorScheme.secondary,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: TextFormField(
-                style: Theme.of(context).textTheme.bodyMedium,
+                focusNode:
+                    context.findAncestorStateOfType<HomeScreenState>()!.focus,
+                style: context.textTheme.bodyMedium,
+                onChanged: (value) => debouncer(() => onChange(value)),
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                   border: InputBorder.none,
-                  hintText: S.of(context).search,
-                  hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                      ),
+                  hintText: context.lang.search,
+                  hintStyle: context.textTheme.bodyMedium?.copyWith(
+                    color: context.colorScheme.primaryContainer,
+                  ),
                   suffixIcon: SvgPicture.asset(
                     AppIcons.search2,
                   ),
@@ -41,98 +120,11 @@ class SearchScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: true ? const NotFind() : ListView(
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                children: [
-                  for (int i = 0; i < 2; i++)
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.secondary,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: const SizedBox(
-                                width: 95,
-                                height: 120,
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Spiderman",
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                                const SizedBox(height: 14),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(AppIcons.star),
-                                    const SizedBox(width: 5),
-                                    Text(
-                                      "9.5",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .tertiary,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 5),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(AppIcons.ticket),
-                                    const SizedBox(width: 5),
-                                    Text(
-                                      "Action",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 5),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(AppIcons.calendar),
-                                    const SizedBox(width: 5),
-                                    Text(
-                                      "2019",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 5),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(AppIcons.clock),
-                                    const SizedBox(width: 5),
-                                    Text(
-                                      "139 minutes",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 5),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 24),
-                      ],
-                    ),
-                ],
+              child: SearchBody(
+                genres: genres,
+                controller: controller,
+                movies: movies,
+                isTyped: searchText.isNotEmpty,
               ),
             ),
           ],

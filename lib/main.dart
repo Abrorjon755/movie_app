@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'src/common/widgets/app.dart';
-
-late SharedPreferences shp;
+import 'src/common/widgets/app_scope.dart';
+import 'src/common/widgets/initialize_app.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  shp = await SharedPreferences.getInstance();
-  runApp(const MyApp());
+  final dependencies = await (const InitializeApp().initialize());
+
+  runApp(
+    AppScope(
+      dependencies: dependencies,
+      child: const MyApp(),
+    ),
+  );
 }

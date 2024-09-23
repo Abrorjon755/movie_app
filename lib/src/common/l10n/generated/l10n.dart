@@ -179,6 +179,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Load More`
+  String get loadMore {
+    return Intl.message(
+      'Load More',
+      name: 'loadMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About Movie`
+  String get aboutMovie {
+    return Intl.message(
+      'About Movie',
+      name: 'aboutMovie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reviews`
+  String get reviews {
+    return Intl.message(
+      'Reviews',
+      name: 'reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cast`
+  String get cast {
+    return Intl.message(
+      'Cast',
+      name: 'cast',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

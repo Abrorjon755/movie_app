@@ -1,5 +1,5 @@
 {
-  "@@locale" : "en",
+  "@@locale": "en",
   "whatToWatch": "What do you want to watch?",
   "home": "Home",
   "search": "Search",
@@ -12,5 +12,9 @@
   "notFound": "We Are Sorry, We Can Not Find The Movie :(",
   "findMovie": "Find your movie by Type title, categories, years, etc ",
   "noMovie": "There is no movie yet!",
-  "pleaseRegister": "Please Register to use more functions"
+  "pleaseRegister": "Please Register to use more functions",
+  "loadMore": "Load More",
+  "aboutMovie": "About Movie",
+  "reviews": "Reviews",
+  "cast": "Cast"
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movie_app/src/common/style/app_icons.dart';
 
-import '../../../common/l10n/generated/l10n.dart';
+import '../../../common/style/app_icons.dart';
+import '../../../common/utils/extension_context.dart';
 
 class NoMovie extends StatelessWidget {
   const NoMovie({super.key});
@@ -19,8 +19,8 @@ class NoMovie extends StatelessWidget {
           SizedBox(
             width: 200,
             child: Text(
-              S.of(context).noMovie,
-              style: Theme.of(context).textTheme.titleMedium,
+              context.lang.noMovie,
+              style: context.textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
           ),
@@ -28,13 +28,13 @@ class NoMovie extends StatelessWidget {
           SizedBox(
             width: 190,
             child: Text(
-              S.of(context).findMovie,
+              context.lang.findMovie,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: Theme.of(context).colorScheme.primaryContainer,
+              style: context.textTheme.labelMedium?.copyWith(
+                color: context.colorScheme.primaryContainer,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

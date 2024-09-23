@@ -22,10 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "aboutMovie": MessageLookupByLibrary.simpleMessage("About Movie"),
+        "cast": MessageLookupByLibrary.simpleMessage("Cast"),
         "detail": MessageLookupByLibrary.simpleMessage("Detail"),
         "findMovie": MessageLookupByLibrary.simpleMessage(
             "Find your movie by Type title, categories, years, etc "),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "loadMore": MessageLookupByLibrary.simpleMessage("Load More"),
         "noMovie":
             MessageLookupByLibrary.simpleMessage("There is no movie yet!"),
         "notFound": MessageLookupByLibrary.simpleMessage(
@@ -34,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleaseRegister": MessageLookupByLibrary.simpleMessage(
             "Please Register to use more functions"),
         "popular": MessageLookupByLibrary.simpleMessage("Popular"),
+        "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "topRated": MessageLookupByLibrary.simpleMessage("Top Rated"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
