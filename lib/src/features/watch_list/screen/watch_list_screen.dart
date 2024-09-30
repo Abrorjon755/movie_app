@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/models/genre.dart';
 import '../../../common/models/movies_model.dart';
+import '../../../common/router/app_router.dart';
 import '../../../common/utils/extension_context.dart';
 import '../../../common/widgets/movie_item.dart';
 import 'no_movie.dart';
@@ -22,7 +24,7 @@ class WatchListScreenState extends State<WatchListScreen> {
     setState(() {});
   }
 
-  void getMovies() async {
+  Future<void> getMovies() async {
     movies.clear();
 
     movies.addAll((await context.dependencies.db.getMovies()).reversed);
@@ -34,6 +36,7 @@ class WatchListScreenState extends State<WatchListScreen> {
   void initState() {
     super.initState();
     getMovies();
+    getGenre();
   }
 
   @override
@@ -41,6 +44,13 @@ class WatchListScreenState extends State<WatchListScreen> {
     return Scaffold(
       backgroundColor: context.colorScheme.primary,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => context.push(AppRouter.settings),
+          icon: Icon(
+            Icons.menu,
+            color: context.colorScheme.onPrimary,
+          ),
+        ),
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
         centerTitle: true,

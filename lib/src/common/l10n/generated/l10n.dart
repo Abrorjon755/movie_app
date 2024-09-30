@@ -219,6 +219,156 @@ class S {
       args: [],
     );
   }
+
+  /// `Images`
+  String get images {
+    return Intl.message(
+      'Images',
+      name: 'images',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Budget`
+  String get budget {
+    return Intl.message(
+      'Budget',
+      name: 'budget',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Info Movie Not Found`
+  String get infoNotFound {
+    return Intl.message(
+      'Info Movie Not Found',
+      name: 'infoNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Overview`
+  String get overview {
+    return Intl.message(
+      'Overview',
+      name: 'overview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age`
+  String get age {
+    return Intl.message(
+      'Age',
+      name: 'age',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Original Language`
+  String get originalLanguage {
+    return Intl.message(
+      'Original Language',
+      name: 'originalLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Popularity`
+  String get popularity {
+    return Intl.message(
+      'Popularity',
+      name: 'popularity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status`
+  String get status {
+    return Intl.message(
+      'Status',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Production Companies`
+  String get productionCompanies {
+    return Intl.message(
+      'Production Companies',
+      name: 'productionCompanies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Black`
+  String get black {
+    return Intl.message(
+      'Black',
+      name: 'black',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Blue`
+  String get darkBlue {
+    return Intl.message(
+      'Dark Blue',
+      name: 'darkBlue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

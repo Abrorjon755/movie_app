@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/models/genre.dart';
 import '../../../common/models/movies_model.dart';
+import '../../../common/router/app_router.dart';
 import '../../../common/style/app_icons.dart';
 import '../../../common/utils/debouncing_throttling.dart';
 import '../../../common/utils/extension_context.dart';
@@ -78,6 +80,13 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       backgroundColor: context.colorScheme.primary,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => context.push(AppRouter.settings),
+          icon: Icon(
+            Icons.menu,
+            color: context.colorScheme.onPrimary,
+          ),
+        ),
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
         centerTitle: true,

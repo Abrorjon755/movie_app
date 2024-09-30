@@ -30,10 +30,6 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
     setState(() {});
   }
 
-  String getImage(String path) {
-    return "${Constants.imageUrl}$path?${Constants.apiKeyString}";
-  }
-
   void pagination() async {
     movies.addAll(
       await context.dependencies.movieRepository
@@ -83,23 +79,26 @@ class _UpcomingMoviesState extends State<UpcomingMovies> {
                 ),
               ),
             )
-          : ZoomTapAnimation(
+          : Hero(
+            tag: "${Constants.imageUrl}${movies[index].posterPath}",
+            child: ZoomTapAnimation(
               onTap: () =>
-                  context.push(AppRouter.movieItem, extra: movies[index]),
+                    context.push(AppRouter.movieItem, extra: movies[index]),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: context.colorScheme.secondary,
-                  borderRadius: BorderRadius.circular(16),
-                ),
+                    color: context.colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: MyCachedImage(
-                    imageUrl:
-                        "${Constants.imageUrl}${movies[index].posterPath}",
-                  ),
+                      imageUrl:
+                          "${Constants.imageUrl}${movies[index].posterPath}",
+                    ),
                 ),
               ),
             ),
+          ),
     );
   }
 }

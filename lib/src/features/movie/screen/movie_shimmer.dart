@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../common/style/app_icons.dart';
 import '../../../common/utils/extension_context.dart';
+import 'movie_tab_bar.dart';
 
 class MovieShimmer extends StatelessWidget {
   const MovieShimmer({super.key});
@@ -22,6 +24,7 @@ class MovieShimmer extends StatelessWidget {
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
+                  color: context.colorScheme.primaryContainer,
                 ),
                 child: SizedBox(
                   height: 42,
@@ -30,18 +33,10 @@ class MovieShimmer extends StatelessWidget {
                       const SizedBox(width: 24),
                       Text(
                         context.lang.search,
-                        style: context.textTheme.titleSmall?.copyWith(
-                          color: context.colorScheme.primaryContainer,
-                        ),
+                        style: context.textTheme.titleSmall,
                       ),
                       const Expanded(child: SizedBox()),
-                      SvgPicture.asset(
-                        AppIcons.search2,
-                        colorFilter: ColorFilter.mode(
-                          context.colorScheme.primaryContainer,
-                          BlendMode.srcATop,
-                        ),
-                      ),
+                      SvgPicture.asset(AppIcons.search2),
                       const SizedBox(width: 14),
                     ],
                   ),
@@ -59,54 +54,58 @@ class MovieShimmer extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     children: [
-                      const SizedBox(width: 16),
+                      const SizedBox(width: 12),
                       for (int i = 0; i < 5; i++)
-                        Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 15,
-                              ),
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color: context.colorScheme.primaryContainer,
+                        ZoomTapAnimation(
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                ),
+                                child: ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: const SizedBox(
-                                  width: 115,
-                                  height: 210,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              child: Stack(
-                                children: [
-                                  Text(
-                                    "${i + 1}",
-                                    style: context.textTheme.displayLarge
-                                        ?.copyWith(
-                                      fontSize: 96,
-                                      foreground: Paint()
-                                        ..style = PaintingStyle.stroke
-                                        ..strokeWidth = 2
-                                        ..color = context
-                                            .colorScheme.onPrimaryContainer,
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: context.colorScheme.secondary,
+                                    ),
+                                    child: const SizedBox(
+                                      width: 130,
+                                      height: 210,
                                     ),
                                   ),
-                                  Text(
-                                    "${i + 1}",
-                                    style: context.textTheme.displayLarge
-                                        ?.copyWith(
-                                      fontSize: 96,
-                                      color: context.colorScheme.primary,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ],
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                child: Stack(
+                                  children: [
+                                    Text(
+                                      "${i + 1}",
+                                      style: context.textTheme.displayLarge
+                                          ?.copyWith(
+                                        fontSize: 96,
+                                        foreground: Paint()
+                                          ..style = PaintingStyle.stroke
+                                          ..strokeWidth = 2
+                                          ..color = context
+                                              .colorScheme.onPrimaryContainer,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${i + 1}",
+                                      style: context.textTheme.displayLarge
+                                          ?.copyWith(
+                                        fontSize: 96,
+                                        color: context.colorScheme.primary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                     ],
                   ),
@@ -114,26 +113,22 @@ class MovieShimmer extends StatelessWidget {
               ],
             ),
           ),
-          SliverAppBar(
-            pinned: true,
-            backgroundColor: context.colorScheme.primary,
-            scrolledUnderElevation: 0,
-            bottom: PreferredSize(
-              preferredSize: const Size(double.infinity, 10),
+          SliverPersistentHeader(
+            delegate: MovieTabBar(
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: TabBar(
-                      isScrollable: true,
                       physics: const BouncingScrollPhysics(),
-                      tabAlignment: TabAlignment.start,
+                      tabAlignment: TabAlignment.fill,
                       dividerHeight: 0,
                       indicatorColor: context.colorScheme.secondary,
                       indicatorSize: TabBarIndicatorSize.tab,
                       labelPadding: const EdgeInsets.only(
                         left: 10,
                         right: 10,
+                        bottom: 12,
                       ),
                       indicatorWeight: 4,
                       labelStyle: context.textTheme.bodyMedium,
@@ -144,7 +139,6 @@ class MovieShimmer extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
                 ],
               ),
             ),
@@ -162,13 +156,12 @@ class MovieShimmer extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6),
                   child: GridView(
-                    physics: const BouncingScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 13,
-                      mainAxisSpacing: 18,
-                      mainAxisExtent: 145,
+                      childAspectRatio: 0.65,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
                     ),
                     children: [
                       for (int i = 0; i < 15; i++)

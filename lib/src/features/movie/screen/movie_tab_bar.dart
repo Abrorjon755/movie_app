@@ -64,6 +64,5 @@ class MovieTabBar extends SliverPersistentHeaderDelegate {
   double get minExtent => 40;
 
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      false;
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => true;
 }

@@ -10,7 +10,7 @@ import '../service/api_service.dart';
 import '../service/db_service.dart';
 
 class AppDependencies {
-  const AppDependencies({
+  AppDependencies({
     required this.apiService,
     required this.movieRepository,
     required this.searchRepository,
@@ -25,8 +25,8 @@ class AppDependencies {
   final ApiService apiService;
   final Dio dio;
 
-  final bool theme;
-  final Locale locale;
+  bool theme;
+  bool locale;
 
   final SharedPreferences shp;
   final DBService db;

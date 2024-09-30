@@ -10,17 +10,18 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-
+class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,
-      locale: context.dependencies.locale,
+      locale: !context.dependencies.locale
+          ? const Locale("en")
+          : const Locale("ru"),
       localizationsDelegates: const [
         S.delegate,
         GlobalWidgetsLocalizations.delegate,

@@ -28,7 +28,7 @@ class DBService {
       voteAverage REAL NOT NULL,
       voteCount INTEGER NOT NULL,
       isSelected INTEGER NOT NULL
-    )
+    );
   ''');
       },
       version: 1,

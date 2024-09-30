@@ -8,47 +8,52 @@ class MovieDetailTabbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
-      delegate: _SliverAppBarDelegate(
-        TabBar(
-          isScrollable: false,
-          labelStyle: context.textTheme.titleSmall?.copyWith(
-            color: context.colorScheme.onPrimary,
+      pinned: true,
+      delegate: MyTabBar(
+        child: ColoredBox(
+          color: context.colorScheme.primary,
+          child: TabBar(
+            isScrollable: false,
+            labelStyle: context.textTheme.titleSmall?.copyWith(
+              color: context.colorScheme.onPrimary,
+            ),
+            labelPadding: const EdgeInsets.only(top: 10, bottom: 10),
+            indicatorColor: context.colorScheme.primaryContainer,
+            dividerHeight: 0,
+            physics: const NeverScrollableScrollPhysics(),
+            tabAlignment: TabAlignment.fill,
+            tabs: [
+              Text(context.lang.aboutMovie, style: context.textTheme.bodyMedium),
+              Text(context.lang.images, style: context.textTheme.bodyMedium),
+              Text(context.lang.cast, style: context.textTheme.bodyMedium),
+            ],
           ),
-          labelPadding: const EdgeInsets.only(bottom: 15, top: 15),
-          indicatorColor: context.colorScheme.primaryContainer,
-          physics: const NeverScrollableScrollPhysics(),
-          tabAlignment: TabAlignment.fill,
-          tabs: [
-            Text(context.lang.aboutMovie),
-            Text(context.lang.reviews),
-            Text(context.lang.cast),
-          ],
         ),
       ),
-      pinned: true,
     );
   }
 }
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
+class MyTabBar extends SliverPersistentHeaderDelegate {
+  MyTabBar({required this.child});
 
-  final TabBar _tabBar;
-
-  @override
-  double get minExtent => _tabBar.preferredSize.height;
-
-  @override
-  double get maxExtent => _tabBar.preferredSize.height;
+  final Widget child;
 
   @override
   Widget build(
-          BuildContext context, double shrinkOffset, bool overlapsContent) =>
-      ColoredBox(
-        color: context.colorScheme.primary,
-        child: _tabBar,
-      );
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) =>
+      child;
 
   @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) => false;
+  double get maxExtent => 40;
+
+  @override
+  double get minExtent => 40;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
+      false;
 }

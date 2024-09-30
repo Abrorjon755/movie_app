@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import '../../../common/models/genre.dart';
 import '../../../common/models/movies_model.dart';
 import '../../../common/utils/extension_context.dart';
+import 'about_movie.dart';
 import 'app_bar_detail.dart';
+import 'movie_actors.dart';
 import 'movie_detail_app_bar.dart';
 import 'movie_detail_tabbar.dart';
+import 'movie_images.dart';
 
 class MovieDetail extends StatefulWidget {
   const MovieDetail({
@@ -48,7 +51,13 @@ class _MovieDetailState extends State<MovieDetail> {
             ),
             const MovieDetailTabbar(),
           ],
-          body: const SizedBox(),
+          body: TabBarView(
+            children: [
+              AboutMovie(id: widget.movie.id),
+              MovieImages(movie: widget.movie),
+              MovieActors(movie: widget.movie),
+            ],
+          ),
         ),
       ),
     );

@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/constants/constants.dart';
 import '../../../common/models/genre.dart';
 import '../../../common/models/movies_model.dart';
+import '../../../common/router/app_router.dart';
 import '../../../common/style/app_icons.dart';
 import '../../../common/utils/extension_context.dart';
 import '../../../common/widgets/my_cached_image.dart';
@@ -26,24 +28,26 @@ class AppBarDetail extends StatelessWidget {
       child: Column(
         children: [
           Stack(
-            fit: StackFit.passthrough,
             clipBehavior: Clip.none,
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
-                ),
-                child: SizedBox(
-                  height: 210,
-                  child: MyCachedImage(
-                    imageUrl: "${Constants.imageUrl}${movie.backdropPath}",
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 250),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: MyCachedImage(
+                      imageUrl: "${Constants.imageUrl}${movie.backdropPath}",
+                    ),
                   ),
                 ),
               ),
               Positioned(
                 top: 170,
-                right: 10,
+                right: 15,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: DecoratedBox(
@@ -86,19 +90,29 @@ class AppBarDetail extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: SizedBox(
-                            width: 95,
-                            child: MyCachedImage(
-                              imageUrl:
-                                  "${Constants.imageUrl}${movie.posterPath}",
+                        Hero(
+                          tag: "${Constants.imageUrl}${movie.posterPath}",
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: SizedBox(
+                              width: 95,
+                              child: InkWell(
+                                onTap: () => context.push(
+                                    AppRouter.fullScreenImage,
+                                    extra:
+                                        "${Constants.imageUrl}${movie.posterPath}"),
+                                child: MyCachedImage(
+                                  imageUrl:
+                                      "${Constants.imageUrl}${movie.posterPath}",
+                                ),
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 80),
                               Text(

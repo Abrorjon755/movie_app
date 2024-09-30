@@ -16,5 +16,20 @@
   "loadMore": "Load More",
   "aboutMovie": "About Movie",
   "reviews": "Reviews",
-  "cast": "Cast"
+  "cast": "Cast",
+  "images": "Images",
+  "name": "Name",
+  "budget": "Budget",
+  "infoNotFound": "Info Movie Not Found",
+  "overview": "Overview",
+  "age": "Age",
+  "originalLanguage": "Original Language",
+  "popularity": "Popularity",
+  "status": "Status",
+  "productionCompanies": "Production Companies",
+  "settings": "Settings",
+  "theme": "Theme",
+  "black": "Black",
+  "darkBlue": "Dark Blue",
+  "language": "Language"
 }

@@ -24,18 +24,17 @@ class MovieRepositoryImpl implements IMovieRepository {
   Future<List<MovieModel>> getMovies(
       {required String categoryName, int page = 1}) async {
     try {
-      Map<String, Object?> queryParams = {
-        "page": page,
-      };
       final response = await apiService.request(
         categoryName,
-        queryParams: queryParams,
+        queryParams: {"page": page},
       );
-      final Map<String, Object?> json = jsonDecode(response ?? '');
-      List<MovieModel> result = (json["results"] as List<dynamic>)
-          .map((e) => MovieModel.fromJson(e))
+      final result = const JsonDecoder()
+          .cast<String, Map<String, Object?>>()
+          .convert(response ?? '');
+      return List<Map<String, Object?>>.from(result['results'] as List)
+          .whereType<Map<String, Object?>>()
+          .map(MovieModel.fromJson)
           .toList();
-      return result;
     } on Object catch (e, s) {
       if (kDebugMode) {
         print("$e\n$s");
@@ -47,19 +46,18 @@ class MovieRepositoryImpl implements IMovieRepository {
   @override
   Future<List<MovieModel>> getNowPlaying() async {
     try {
-      Map<String, Object?> queryParams = {
-        "page": 1,
-      };
       final response = await apiService.request(
         Constants.pathNowPlaying,
-        queryParams: queryParams,
+        queryParams: {"page": 1},
       );
-      final Map<String, Object?> json = jsonDecode(response ?? '');
-      List<MovieModel> result = (json["results"] as List<dynamic>)
-          .map((e) => MovieModel.fromJson(e))
+      final result = const JsonDecoder()
+          .cast<String, Map<String, Object?>>()
+          .convert(response ?? '');
+      return List<Map<String, Object?>>.from(result['results'] as List)
+          .whereType<Map<String, Object?>>()
+          .map(MovieModel.fromJson)
           .take(9)
           .toList();
-      return result;
     } on Object catch (e, s) {
       if (kDebugMode) {
         print("$e\n$s");

@@ -27,9 +27,9 @@ class MovieItem extends StatelessWidget {
     return ZoomTapAnimation(
       onTap: () async {
         await context.push(AppRouter.movieItem, extra: movie);
-        if(context.mounted){
-          context.findAncestorStateOfType<WatchListScreenState>()?.getMovies();
-        }
+        await context
+            .findAncestorStateOfType<WatchListScreenState>()
+            ?.getMovies();
       },
       child: Column(
         children: [
@@ -58,7 +58,6 @@ class MovieItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: context.textTheme.titleMedium,
                       ),
-                      const SizedBox(height: 10),
                       Expanded(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -79,12 +78,16 @@ class MovieItem extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 6),
                             Row(
                               children: [
                                 SvgPicture.asset(
                                   AppIcons.ticket,
                                   width: 19,
+                                  colorFilter: ColorFilter.mode(
+                                    context.colorScheme.primaryContainer,
+                                    BlendMode.srcATop,
+                                  ),
                                 ),
                                 const SizedBox(width: 5),
                                 Expanded(
@@ -96,12 +99,16 @@ class MovieItem extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 6),
                             Row(
                               children: [
                                 SvgPicture.asset(
                                   AppIcons.calendar,
                                   width: 19,
+                                  colorFilter: ColorFilter.mode(
+                                    context.colorScheme.primaryContainer,
+                                    BlendMode.srcATop,
+                                  ),
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
@@ -110,16 +117,20 @@ class MovieItem extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 6),
                             Row(
                               children: [
                                 SvgPicture.asset(
-                                  AppIcons.clock,
+                                  AppIcons.popularity,
                                   width: 19,
+                                  colorFilter: ColorFilter.mode(
+                                    context.colorScheme.primaryContainer,
+                                    BlendMode.srcATop,
+                                  ),
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  "139 minutes",
+                                  movie.popularity.toStringAsFixed(3),
                                   style: context.textTheme.labelMedium,
                                 ),
                               ],

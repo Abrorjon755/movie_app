@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/constants/constants.dart';
 import '../../../common/models/movies_model.dart';
+import '../../../common/router/app_router.dart';
 import '../../../common/style/app_icons.dart';
 import '../../../common/utils/extension_context.dart';
+import '../../home/screen/home_screen.dart';
 import 'header_movies.dart';
 import 'movie_shimmer.dart';
 import 'movie_tab_bar.dart';
@@ -55,6 +58,13 @@ class _MovieScreenState extends State<MovieScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
+        leading: IconButton(
+          onPressed: () => context.push(AppRouter.settings),
+          icon: Icon(
+            Icons.menu,
+            color: context.colorScheme.onPrimary,
+          ),
+        ),
         centerTitle: true,
         title: Text(
           context.lang.whatToWatch,
@@ -72,7 +82,11 @@ class _MovieScreenState extends State<MovieScreen> {
                   SliverAppBar(
                     backgroundColor: WidgetStateColor.transparent,
                     title: InkWell(
-                      onTap: () => widget.onPressed(1),
+                      onTap: () {
+                        context
+                            .findAncestorStateOfType<HomeScreenState>()
+                            ?.pageChange(1, context);
+                      },
                       overlayColor: WidgetStateColor.transparent,
                       child: DecoratedBox(
                         decoration: BoxDecoration(

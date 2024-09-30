@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/movie/data/movie_repository.dart';
@@ -17,18 +18,26 @@ class InitializeApp {
     /// Initial Settings
     WidgetsFlutterBinding.ensureInitialized();
 
+    await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     /// Local Settings
     final shp = await SharedPreferences.getInstance();
     final db = await DBService.initialize();
 
-    final theme = shp.getBool(Constants.getTheme) ?? false;
-    final locale = Locale(shp.getString(Constants.getLocale) ?? "en");
+    bool theme = shp.getBool(Constants.getTheme) ?? false;
+    bool locale = shp.getBool(Constants.getLocale) ?? false;
+
 
     /// API Service
 
     final dio = Dio(
       BaseOptions(
         baseUrl: Constants.baseUrl,
+        connectTimeout: const Duration(seconds: 300),
+        receiveTimeout: const Duration(seconds: 300),
       ),
     );
 

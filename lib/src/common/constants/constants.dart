@@ -8,6 +8,7 @@ class Constants {
 
   static const String baseUrl = "https://api.themoviedb.org";
   static const String imageUrl = "https://image.tmdb.org/t/p/w500";
+  static const String imageUrlOriginal = "https://image.tmdb.org/t/p/original";
 
   static const String genre = '/3/genre/movie/list';
 
@@ -18,5 +19,9 @@ class Constants {
   static const String pathUpcoming = "/3/movie/upcoming";
   static const String pathSearch = "/3/search/movie";
   static const String pathSingleMovie = "/3/movie";
+
   static const String apiKeyString = "api_key=c0b6525896f89213f42e9aa279d0570e";
+  static const Map<String, Object?> apiKey ={
+    "api_key": "c0b6525896f89213f42e9aa279d0570e",
+  };
 }

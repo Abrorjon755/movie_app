@@ -68,7 +68,7 @@ class ApiService {
       }
 
       return jsonEncode(response.data);
-    } on Object catch (e, _) {
+    } on Object catch (_) {
       rethrow;
     } finally {
       debugPrint('TIME FOR API -> ${(sw..stop()).elapsedMilliseconds} ms');

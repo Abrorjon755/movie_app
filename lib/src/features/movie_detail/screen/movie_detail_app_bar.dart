@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../common/models/movies_model.dart';
 import '../../../common/style/app_icons.dart';
 import '../../../common/utils/extension_context.dart';
+import '../../watch_list/screen/watch_list_screen.dart';
 
 class MovieDetailAppBar extends StatefulWidget {
   const MovieDetailAppBar({super.key, required this.movie});
@@ -26,6 +27,9 @@ class _MovieDetailAppBarState extends State<MovieDetailAppBar> {
     setState(() {
       isSaved = !isSaved;
     });
+    if (context.mounted) {
+      context.findAncestorStateOfType<WatchListScreenState>()?.getMovies();
+    }
   }
 
   Future<void> saveToStorage() async {
@@ -61,7 +65,6 @@ class _MovieDetailAppBarState extends State<MovieDetailAppBar> {
           color: context.colorScheme.onPrimary,
         ),
       ),
-      leadingWidth: 60,
       pinned: true,
       scrolledUnderElevation: 0,
       centerTitle: true,
